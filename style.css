@@ -88,3 +88,11 @@ footer {
   border-radius: 10px;
   margin-bottom: 15px;
 }
+
+.volunteer h2,
+.leadership h2 {
+  color: #009688;
+  border-left: 6px solid #4db6ac;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}

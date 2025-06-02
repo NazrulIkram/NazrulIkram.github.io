@@ -1,3 +1,5 @@
+// Updated script.js with dark mode as default and other requested changes
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize loader
@@ -14,14 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create navigation bar
     createNavigation();
     
-    // Initialize theme toggle
-    initThemeToggle();
+    // Initialize fixed theme toggle (replacing back-to-top)
+    initFixedThemeToggle();
     
     // Initialize scroll animations
     initScrollAnimations();
-    
-    // Initialize back to top button
-    initBackToTop();
     
     // Initialize project cards
     initProjectCards();
@@ -31,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize form validation
     initFormValidation();
+    
+    // Add skill level fractions
+    addSkillFractions();
 });
 
 // Create navigation bar
@@ -80,12 +82,6 @@ function createNavigation() {
         navLinks.appendChild(link);
     });
     
-    // Create theme toggle button
-    const themeToggle = document.createElement('button');
-    themeToggle.className = 'theme-toggle';
-    themeToggle.innerHTML = '☀️';
-    themeToggle.setAttribute('aria-label', 'Toggle dark mode');
-    
     // Create mobile menu button
     const mobileMenuBtn = document.createElement('button');
     mobileMenuBtn.className = 'mobile-menu-btn';
@@ -98,7 +94,6 @@ function createNavigation() {
     // Append elements
     navbar.appendChild(logo);
     navbar.appendChild(navLinks);
-    navbar.appendChild(themeToggle);
     navbar.appendChild(mobileMenuBtn);
     navContainer.appendChild(navbar);
     
@@ -114,29 +109,62 @@ function createNavigation() {
     });
 }
 
-// Initialize theme toggle
-function initThemeToggle() {
-    const themeToggle = document.querySelector('.theme-toggle');
-    if (themeToggle) {
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.innerHTML = '🌙';
-        }
-        
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                themeToggle.innerHTML = '🌙';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.innerHTML = '☀️';
-                localStorage.setItem('theme', 'light');
-            }
-        });
+// Initialize fixed theme toggle (replacing back-to-top)
+function initFixedThemeToggle() {
+    // Create fixed theme toggle button
+    const fixedThemeToggle = document.createElement('button');
+    fixedThemeToggle.className = 'fixed-theme-toggle';
+    fixedThemeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    document.body.appendChild(fixedThemeToggle);
+    
+    // Check for saved theme preference or use dark mode as default
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'light') {
+        // User explicitly chose light mode before
+        fixedThemeToggle.innerHTML = '☀️';
+    } else {
+        // Either no preference saved or dark mode was saved
+        // Set dark mode as default
+        document.body.classList.add('dark-mode');
+        fixedThemeToggle.innerHTML = '🌙';
+        localStorage.setItem('theme', 'dark');
     }
+    
+    // Toggle theme when clicked
+    fixedThemeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        
+        if (document.body.classList.contains('dark-mode')) {
+            fixedThemeToggle.innerHTML = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            fixedThemeToggle.innerHTML = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
+
+// Add skill fractions to display skill levels
+function addSkillFractions() {
+    const skillItems = document.querySelectorAll('.skill-item');
+    
+    skillItems.forEach(item => {
+        const skillName = item.querySelector('.skill-info span');
+        const dots = item.querySelectorAll('.dot');
+        const filledDots = item.querySelectorAll('.dot.filled');
+        
+        if (skillName && dots.length > 0) {
+            // Create fraction display
+            const fraction = document.createElement('span');
+            fraction.className = 'skill-fraction';
+            fraction.textContent = `${filledDots.length}/${dots.length}`;
+            
+            // Insert after skill name
+            skillName.textContent = `${skillName.textContent} `;
+            skillName.appendChild(fraction);
+        }
+    });
 }
 
 // Initialize scroll animations
@@ -165,33 +193,6 @@ function initScrollAnimations() {
     const skillBars = document.querySelectorAll('.skill-progress-bar');
     skillBars.forEach(bar => {
         observer.observe(bar);
-    });
-}
-
-// Initialize back to top button
-function initBackToTop() {
-    // Create back to top button
-    const backToTop = document.createElement('div');
-    backToTop.className = 'back-to-top';
-    backToTop.innerHTML = '↑';
-    backToTop.setAttribute('aria-label', 'Back to top');
-    document.body.appendChild(backToTop);
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-    
-    // Scroll to top when clicked
-    backToTop.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
     });
 }
 

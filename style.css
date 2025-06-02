@@ -660,6 +660,37 @@ body.dark-mode .skill-progress {
   transform: scaleX(1);
 }
 
+/* Skill Rating (Dots) */
+.skill-rating {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--apple-light-gray);
+  transition: var(--apple-transition);
+}
+
+.about .dot.filled:nth-child(1) { background-color: var(--vibrant-blue); }
+.about .dot.filled:nth-child(2) { background-color: #1A7BFF; }
+.about .dot.filled:nth-child(3) { background-color: #3390FF; }
+.about .dot.filled:nth-child(4) { background-color: #4DA5FF; }
+.about .dot.filled:nth-child(5) { background-color: #66BAFF; }
+
+body.dark-mode .dot {
+  background-color: #333;
+}
+
+body.dark-mode .about .dot.filled:nth-child(1) { background-color: var(--dark-blue); }
+body.dark-mode .about .dot.filled:nth-child(2) { background-color: #1A6AE6; }
+body.dark-mode .about .dot.filled:nth-child(3) { background-color: #337FFF; }
+body.dark-mode .about .dot.filled:nth-child(4) { background-color: #4D94FF; }
+body.dark-mode .about .dot.filled:nth-child(5) { background-color: #66A9FF; }
+
+
 /* Timeline for experience */
 .timeline {
   position: relative;

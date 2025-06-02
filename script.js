@@ -1,4 +1,4 @@
-// Updated script.js with dark mode as default and other requested changes
+// Updated script.js with dark mode as default and removed skill fractions
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -31,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize form validation
     initFormValidation();
     
-    // Add skill level fractions
-    addSkillFractions();
+    // Removed addSkillFractions() call
 });
 
 // Create navigation bar
@@ -141,28 +140,6 @@ function initFixedThemeToggle() {
         } else {
             fixedThemeToggle.innerHTML = '☀️';
             localStorage.setItem('theme', 'light');
-        }
-    });
-}
-
-// Add skill fractions to display skill levels
-function addSkillFractions() {
-    const skillItems = document.querySelectorAll('.skill-item');
-    
-    skillItems.forEach(item => {
-        const skillName = item.querySelector('.skill-info span');
-        const dots = item.querySelectorAll('.dot');
-        const filledDots = item.querySelectorAll('.dot.filled');
-        
-        if (skillName && dots.length > 0) {
-            // Create fraction display
-            const fraction = document.createElement('span');
-            fraction.className = 'skill-fraction';
-            fraction.textContent = `${filledDots.length}/${dots.length}`;
-            
-            // Insert after skill name
-            skillName.textContent = `${skillName.textContent} `;
-            skillName.appendChild(fraction);
         }
     });
 }

@@ -1,4 +1,4 @@
-/* Updated CSS with fixed theme toggle and skill fraction styling */
+/* Updated CSS with theme toggle icon only (no background) and removed skill fraction styling */
 
 body {
   margin: 0;
@@ -163,34 +163,32 @@ body.dark-mode .nav-links a:hover {
   color: #00e4a1;
 }
 
-/* Fixed Theme Toggle Button (replacing back-to-top) */
+/* Fixed Theme Toggle Button (icon only, no background) */
 .fixed-theme-toggle {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 50px;
   height: 50px;
-  background: linear-gradient(to right, #00c6ff, #00e4a1);
-  color: white;
+  background: transparent; /* Removed background */
+  color: #0072ff; /* Changed to blue to match theme */
   border: none;
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 1.8rem; /* Increased size for better visibility */
   z-index: 999;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
+  text-shadow: 0 0 10px rgba(0,0,0,0.2); /* Added subtle text shadow for visibility */
 }
 
 .fixed-theme-toggle:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
 }
 
 body.dark-mode .fixed-theme-toggle {
-  background: linear-gradient(to right, #00c6ff, #00e4a1);
+  color: #00c6ff; /* Light blue in dark mode for better visibility */
 }
 
 /* Hide the original theme toggle in the navbar on mobile */
@@ -629,23 +627,7 @@ body.dark-mode .skill-category h3 {
   align-items: center;
 }
 
-/* Skill fraction styling */
-.skill-fraction {
-  background: linear-gradient(to right, #00c6ff, #00e4a1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 600;
-  margin-left: 5px;
-  font-size: 0.85em;
-}
-
-body.dark-mode .skill-fraction {
-  background: linear-gradient(to right, #00c6ff, #00e4a1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+/* Removed skill fraction styling */
 
 .skill-progress {
   height: 8px;
@@ -843,6 +825,7 @@ body.dark-mode .timeline-date {
     right: 15px;
     width: 45px;
     height: 45px;
+    font-size: 1.6rem; /* Slightly smaller on mobile but still visible */
   }
 }
 
